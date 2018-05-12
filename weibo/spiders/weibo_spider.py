@@ -14,6 +14,7 @@ class WeiboSpider(Spider):
     weibo_url = 'https://m.weibo.cn/api/container/getIndex?uid={uid}&type=uid&page={page}&containerid=107603{uid}'
     
     def __init__(self, users_id):
+        super(WeiboSpider, self).__init__()
         self.start_users = users_id.split(',')
 
     def start_requests(self):
@@ -114,9 +115,6 @@ class WeiboSpider(Spider):
         :param response: Response对象
         """
         result = json.loads(response.text)
-        print('-'*30)
-        print(result)
-        print('-'*30)
         if result.get('ok') and result.get('data').get('cards'):
             weibos = result.get('data').get('cards')
             for weibo in weibos:
